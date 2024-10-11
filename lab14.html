@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <div class="profile" id="profile">
+        <div class="notify">
+            <p>1</p>
+        </div>
+    </div>
+
+    <h1 id="username">Username, hi</h1>
+    <div class = "n1">
+    <label class="username">Set username</label><input id="input-name" type="text"><button onclick="setName()">set</button>
+    </div>
+    <div class="n2">
+    <label class="username">Set the profile image URL</label><input id="input-url" type="text"><button onclick="setImg()">set</button>
+    </div>
+
+    <div class="phone">
+        <p>Phone Number List</p>
+        <input type="text">
+        <input type="text">
+        <button onclick="addRow()">add</button>
+    </div>
+    <table id="table">
+        <tr>
+            <th>name</th>
+            <th>phone</th>
+        </tr>
+    </table>
+
+    <script>
+        const name = document.getElementById("username");
+        const input = document.getElementById("input-name");
+        const profile = document.getElementById("profile");
+        const url = document.getElementById("input-url");
+        const table = document.getElementById("table");
+
+        function setName(){
+            name.textContent = input.value + ", oh";
+            input.value = "";
+        }
+        function setImg(){
+            profile.style.backgroundImage = "url(" + inputUrl.value + ")"
+        }
+        function addRow(){
+            const row = document.createElement("tr");
+            const cell1 = document.createElement("td");
+            const cell2 = document.createElement("td");
+            cell1.textContent = "boygenius"
+            cell2.textContent = "12133"
+            row.appendChild(cell1);
+            row.appendChild(cell2);
+            table.appendChild(row)
+        }
+    </script>
+</body>
+</html>
