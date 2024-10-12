@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <a href="https://github.com/irxmpnx" class="username" id="username">Nannapas Chinsirichokchai 67070243</a>
+    <div class="profile" id="profile">
+        <div class="notify">
+            <p class="noti">1</p>
+        </div>
+    </div>
+
+    <div class="n1">
+        <label>Set username</label>
+        <input placeholder="Enter Username" id="input-name" type="text">
+        <button onclick="setName()">Set</button>
+    </div>
+    <div class="n2">
+        <label>Set the profile image URL</label>
+        <input placeholder="Enter Image URL" id="input-url" type="text">
+        <button onclick="setImg()">Set</button>
+    </div>
+
+    <div class="phone">
+        <p>Phone Number List</p>
+        <input placeholder="Name" id="input-name-phone" type="text" required>
+        <input placeholder="Tel" id="input-tel-phone" type="tel" required>
+        <button onclick="addRow()">Add</button><button onclick="saveCSV()">Export</button>
+    </div>
+    <table id="table">
+        <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Phone</th>
+        </tr>
+    </table>
+
+    <script>
+        const nameElement = document.getElementById("username");
+        const inputName = document.getElementById("input-name");
+        const profile = document.getElementById("profile");
+        const inputUrl = document.getElementById("input-url");
+        const table = document.getElementById("table");
+        const inputNamePhone = document.getElementById("input-name-phone");
+        const inputTelPhone = document.getElementById("input-tel-phone");
+        let phonenumber = [];
+        let rowCount = 0;
+
+        function setName() {
+            nameElement.textContent = inputName.value + "'s Phone Book";
+            inputName.value = "";
+        }
+
+        function setImg() {
+            profile.style.backgroundImage = "url(" + inputUrl.value + ")";
+            inputUrl.value = "";
+        }
+
+        function addRow() {
+            const nameValue = inputNamePhone.value;
+            const telValue = inputTelPhone.value;
+            const row = document.createElement("tr");
+            const cellNumber = document.createElement("td");
+            const cellName = document.createElement("td");
+            const cellTel = document.createElement("td");
+
+            rowCount++;
+            cellNumber.textContent = rowCount;
+            cellName.textContent = nameValue;
+            cellTel.textContent = telValue;
+
+            row.appendChild(cellNumber);
+            row.appendChild(cellName);
+            row.appendChild(cellTel);
+            table.appendChild(row);
+
+            phonenumber.push([rowCount, nameValue, telValue]);
+
+            inputNamePhone.value = "";
+            inputTelPhone.value = "";
+        }
+
+        function saveCSV() {
+            const csvContent = phonenumber.map(row => row.join(",")).join("\n"); // แปลงอาร์เรย์เป็นสตริง CSV
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            const url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", "data.csv");
+            link.style.visibility = "hidden";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
